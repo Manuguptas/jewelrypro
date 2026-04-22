@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jewelry 10X – Digital Solution for Jewellery</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --gold-dark: #8B6914;
+    --rose: #E8475F;
+    --rose-dark: #C0304A;
+    --ink: #111111;
+    --ink-mid: #2A2A2A;
+    --cream: #FDF8F0;
+    --cream-dark: #F2EAD8;
+    --white: #FFFFFF;
+    --gray: #666666;
+    --light-gray: #E8E4DC;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 6%;
+    background: rgba(253,248,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--light-gray);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.08); }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--rose); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: .85rem; font-weight: 500; letter-spacing: .04em;
+    color: var(--ink); text-decoration: none; text-transform: uppercase;
+    position: relative; padding-bottom: 2px;
+    transition: color .2s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1.5px; background: var(--gold);
+    transform: scaleX(0); transition: transform .3s;
+  }
+  .nav-links a:hover { color: var(--gold-dark); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: var(--rose); color: var(--white);
+    padding: 10px 22px; border-radius: 4px;
+    font-size: .85rem; font-weight: 600; text-decoration: none;
+    transition: background .2s, transform .15s;
+  }
+  .nav-cta:hover { background: var(--rose-dark); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--ink); display: block; transition: .3s; }
+
+  /* ── PAGE SECTIONS ── */
+  section { min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* ──────────────────────────────────────── */
+  /* PAGE 1 — HERO */
+  /* ──────────────────────────────────────── */
+  #hero {
+    padding-top: 80px;
+    background: var(--cream);
+    position: relative; overflow: hidden;
+    justify-content: center;
+  }
+  .hero-bg-ornament {
+    position: absolute; top: -100px; right: -120px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-bg-lines {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      90deg, transparent, transparent 39px,
+      rgba(201,168,76,.06) 39px, rgba(201,168,76,.06) 40px
+    );
+    pointer-events: none;
+  }
+  .hero-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 60px;
+    max-width: 1200px; margin: 0 auto; padding: 80px 6%;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold-light); color: var(--gold-dark);
+    padding: 6px 14px; border-radius: 20px;
+    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero-badge::before { content: '◆'; font-size: .6rem; }
+  h1.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 900; line-height: 1.05;
+    color: var(--ink); margin-bottom: 24px;
+  }
+  h1.hero-title em { color: var(--rose); font-style: normal; }
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.7; color: var(--gray);
+    max-width: 480px; margin-bottom: 36px;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--rose); color: #fff;
+    padding: 14px 32px; border-radius: 4px;
+    font-size: .9rem; font-weight: 600; text-decoration: none;
+    transition: background .2s, transform .15s, box-shadow .2s;
+    box-shadow: 0 4px 16px rgba(232,71,95,.3);
+  }
+  .btn-primary:hover { background: var(--rose-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,71,95,.35); }
+  .btn-outline {
+    border: 2px solid var(--gold); color: var(--gold-dark);
+    padding: 12px 28px; border-radius: 4px;
+    font-size: .9rem; font-weight: 600; text-decoration: none;
+    transition: background .2s, color .2s;
+  }
+  .btn-outline:hover { background: var(--gold); color: var(--white); }
+  .hero-stats {
+    display: flex; gap: 36px; margin-top: 48px; padding-top: 36px;
+    border-top: 1px solid var(--light-gray);
+  }
+  .stat-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 900; color: var(--rose);
+  }
+  .stat-item p { font-size: .8rem; color: var(--gray); text-transform: uppercase; letter-spacing: .06em; }
+  /* Phone mockup */
+  .hero-visual { display: flex; justify-content: center; position: relative; }
+  .phone-wrap {
+    position: relative; width: 260px;
+    animation: floatPhone 4s ease-in-out infinite;
+  }
+  @keyframes floatPhone { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+  .phone-shell {
+    background: var(--ink-mid);
+    border-radius: 44px;
+    padding: 12px;
+    box-shadow: 0 32px 80px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+  .phone-screen {
+    background: #fff; border-radius: 34px; overflow: hidden;
+    font-size: .65rem;
+  }
+  .phone-screen-inner { padding: 14px 12px; }
+  .ps-header {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Playfair Display', serif;
+    font-size: .9rem; font-weight: 700; color: var(--ink);
+    margin-bottom: 12px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .ps-header span.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rose); display: block; }
+  .ps-toggle {
+    display: flex; background: var(--cream-dark); border-radius: 20px;
+    overflow: hidden; margin-bottom: 14px;
+  }
+  .ps-toggle button {
+    flex: 1; padding: 5px 0; font-size: .6rem; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-weight: 600;
+    transition: background .2s;
+  }
+  .ps-toggle .active { background: var(--rose); color: #fff; border-radius: 20px; }
+  .ps-toggle .inactive { background: transparent; color: var(--gray); }
+  .ps-label { font-size: .62rem; color: var(--gray); margin-bottom: 4px; font-weight: 500; }
+  .ps-input {
+    background: var(--cream); border: 1px solid var(--light-gray);
+    border-radius: 6px; padding: 7px 10px;
+    width: 100%; font-size: .65rem; color: var(--gray);
+    margin-bottom: 10px; font-family: 'DM Sans', sans-serif;
+  }
+  .ps-row { display: flex; gap: 8px; }
+  .ps-row .ps-input { margin-bottom: 0; }
+  .ps-btn-calc {
+    width: 100%; margin-top: 12px; padding: 9px 0; border: none;
+    background: var(--gold); color: var(--ink); border-radius: 6px;
+    font-size: .7rem; font-weight: 700; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .ps-btn-reset {
+    width: 100%; margin-top: 6px; padding: 7px 0; border: none;
+    background: var(--rose); color: #fff; border-radius: 6px;
+    font-size: .65rem; font-weight: 600; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .phone-glow {
+    position: absolute; bottom: -40px; left: 50%;
+    transform: translateX(-50%);
+    width: 200px; height: 60px;
+    background: radial-gradient(ellipse, rgba(201,168,76,.35) 0%, transparent 70%);
+    filter: blur(12px);
+  }
+  .hero-floating-card {
+    position: absolute; top: 30px; right: -50px;
+    background: #fff; border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.12);
+    display: flex; align-items: center; gap: 10px;
+    animation: slideInCard 1s ease-out .5s both;
+  }
+  @keyframes slideInCard { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+  .hfc-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--gold-light); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .hfc-text p { font-size: .65rem; color: var(--gray); }
+  .hfc-text strong { font-size: .8rem; color: var(--ink); }
+  .hero-floating-card2 {
+    position: absolute; bottom: 60px; left: -40px;
+    background: var(--rose); color: #fff; border-radius: 10px;
+    padding: 10px 14px;
+    box-shadow: 0 8px 24px rgba(232,71,95,.3);
+    animation: slideInCard2 1s ease-out .8s both;
+  }
+  @keyframes slideInCard2 { from{opacity:0;transform:translateX(-30px)} to{opacity:1;transform:translateX(0)} }
+  .hero-floating-card2 strong { font-size: .95rem; display: block; }
+  .hero-floating-card2 span { font-size: .65rem; opacity: .85; }
+
+  /* ──────────────────────────────────────── */
+  /* PAGE 2 — FEATURES */
+  /* ──────────────────────────────────────── */
+  #features {
+    background: var(--ink);
+    color: var(--white);
+    padding: 100px 6%;
+    justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .features-bg {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(201,168,76,.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 80%, rgba(232,71,95,.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .section-header { text-align: center; max-width: 600px; margin: 0 auto 64px; position: relative; z-index: 1; }
+  .section-tag {
+    display: inline-block; color: var(--gold); letter-spacing: .12em;
+    font-size: .75rem; font-weight: 600; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 900; line-height: 1.15;
+    color: var(--white);
+  }
+  .section-title.dark { color: var(--ink); }
+  .section-sub { font-size: .95rem; color: rgba(255,255,255,.55); margin-top: 14px; line-height: 1.7; }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; max-width: 1100px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  .feature-card {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.07);
+    padding: 40px 32px;
+    transition: background .3s, transform .3s;
+    position: relative; overflow: hidden;
+  }
+  .feature-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0); transition: transform .4s;
+  }
+  .feature-card:hover { background: rgba(255,255,255,.07); transform: translateY(-4px); }
+  .feature-card:hover::before { transform: scaleX(1); }
+  .fc-icon {
+    width: 52px; height: 52px; border-radius: 10px;
+    background: rgba(201,168,76,.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 20px;
+    border: 1px solid rgba(201,168,76,.2);
+  }
+  .fc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--white); margin-bottom: 10px;
+  }
+  .fc-desc { font-size: .88rem; color: rgba(255,255,255,.5); line-height: 1.7; }
+  .fc-tag {
+    display: inline-block; margin-top: 18px;
+    font-size: .7rem; font-weight: 600; color: var(--gold);
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+
+  /* ──────────────────────────────────────── */
+  /* PAGE 3 — INTEREST CALCULATOR */
+  /* ──────────────────────────────────────── */
+  #calculator {
+    background: var(--cream);
+    padding: 100px 6%;
+    justify-content: center;
+  }
+  .calc-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .calc-info .section-tag { color: var(--rose); }
+  .calc-info .section-title.dark { color: var(--ink); }
+  .calc-bullets { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .calc-bullet {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 18px 20px; background: #fff;
+    border-radius: 8px; border-left: 3px solid var(--gold);
+    box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    transition: transform .2s;
+  }
+  .calc-bullet:hover { transform: translateX(4px); }
+  .cb-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--gold-light); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: .85rem; margin-top: 1px; }
+  .cb-text strong { display: block; font-size: .9rem; color: var(--ink); margin-bottom: 3px; }
+  .cb-text span { font-size: .82rem; color: var(--gray); line-height: 1.5; }
+  /* Calculator widget */
+  .calc-widget {
+    background: #fff; border-radius: 20px;
+    padding: 40px 36px;
+    box-shadow: 0 16px 60px rgba(0,0,0,.1);
+    border: 1px solid var(--light-gray);
+  }
+  .cw-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 800; color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .cw-sub { font-size: .85rem; color: var(--gray); margin-bottom: 28px; }
+  .cw-toggle {
+    display: flex; background: var(--cream-dark); border-radius: 30px;
+    padding: 4px; margin-bottom: 28px; gap: 4px;
+  }
+  .cw-toggle button {
+    flex: 1; padding: 9px; border: none; border-radius: 26px;
+    font-family: 'DM Sans', sans-serif; font-size: .85rem; font-weight: 600;
+    cursor: pointer; transition: background .25s, color .25s;
+  }
+  .cw-toggle .active-btn { background: var(--rose); color: #fff; box-shadow: 0 2px 8px rgba(232,71,95,.3); }
+  .cw-toggle .inactive-btn { background: transparent; color: var(--gray); }
+  .cw-field { margin-bottom: 18px; }
+  .cw-field label { display: block; font-size: .78rem; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 7px; }
+  .cw-field input {
+    width: 100%; padding: 12px 16px;
+    background: var(--cream); border: 1.5px solid var(--light-gray);
+    border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: .95rem; color: var(--ink);
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+  }
+  .cw-field input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,.12); }
+  .cw-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .cw-calc-btn {
+    width: 100%; padding: 14px; border: none; border-radius: 8px;
+    background: var(--gold); color: var(--ink);
+    font-family: 'DM Sans', sans-serif; font-size: .95rem; font-weight: 700;
+    cursor: pointer; margin-top: 6px;
+    transition: background .2s, transform .15s;
+  }
+  .cw-calc-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .cw-reset-btn {
+    width: 100%; padding: 11px; border: none; border-radius: 8px;
+    background: var(--cream-dark); color: var(--gray);
+    font-family: 'DM Sans', sans-serif; font-size: .85rem; font-weight: 500;
+    cursor: pointer; margin-top: 10px;
+    transition: background .2s;
+  }
+  .cw-reset-btn:hover { background: var(--light-gray); }
+  .cw-result {
+    margin-top: 24px; padding: 20px; background: var(--ink);
+    border-radius: 12px; display: none;
+    animation: resultFade .4s ease-out;
+  }
+  @keyframes resultFade { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .cw-result.show { display: block; }
+  .cwr-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .cwr-row:last-child { border-bottom: none; }
+  .cwr-row span { font-size: .8rem; color: rgba(255,255,255,.5); }
+  .cwr-row strong { font-size: .95rem; color: var(--white); }
+  .cwr-total strong { font-size: 1.2rem; color: var(--gold); }
+
+  /* ──────────────────────────────────────── */
+  /* PAGE 4 — HOW IT WORKS */
+  /* ──────────────────────────────────────── */
+  #how-it-works {
+    background: var(--ink-mid);
+    color: var(--white);
+    padding: 100px 6%;
+    justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .hiw-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; max-width: 1100px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  .hiw-step {
+    padding: 40px 28px; position: relative; text-align: center;
+    border-right: 1px solid rgba(255,255,255,.06);
+  }
+  .hiw-step:last-child { border-right: none; }
+  .hiw-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; font-weight: 900;
+    color: rgba(201,168,76,.12); line-height: 1;
+    margin-bottom: 16px; display: block;
+  }
+  .hiw-icon {
+    width: 56px; height: 56px; border-radius: 12px;
+    background: rgba(201,168,76,.1);
+    border: 1px solid rgba(201,168,76,.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin: 0 auto 20px;
+  }
+  .hiw-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--white);
+    margin-bottom: 10px;
+  }
+  .hiw-desc { font-size: .85rem; color: rgba(255,255,255,.45); line-height: 1.7; }
+  .hiw-connector {
+    position: absolute; top: 50%; right: -1px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--gold); z-index: 2;
+    transform: translateY(-50%);
+    box-shadow: 0 0 0 4px rgba(201,168,76,.2);
+  }
+  /* Testimonial strip */
+  .testimonial-strip {
+    max-width: 1100px; margin: 80px auto 0;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; position: relative; z-index: 1;
+  }
+  .testi-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 12px; padding: 28px 24px;
+    transition: background .3s;
+  }
+  .testi-card:hover { background: rgba(255,255,255,.08); }
+  .testi-stars { color: var(--gold); font-size: .85rem; margin-bottom: 12px; }
+  .testi-text { font-size: .88rem; color: rgba(255,255,255,.6); line-height: 1.7; margin-bottom: 18px; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--rose); display: flex; align-items: center; justify-content: center; font-size: .8rem; font-weight: 700; color: #fff; }
+  .testi-name strong { display: block; font-size: .85rem; color: var(--white); }
+  .testi-name span { font-size: .75rem; color: rgba(255,255,255,.4); }
+
+  /* ──────────────────────────────────────── */
+  /* PAGE 5 — BILLING & INVENTORY */
+  /* ──────────────────────────────────────── */
+  #billing {
+    background: var(--cream);
+    padding: 100px 6%;
+    justify-content: center;
+  }
+  .billing-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: start;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .billing-left .section-tag { color: var(--gold-dark); }
+  .billing-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+  .billing-card {
+    display: grid; grid-template-columns: 48px 1fr auto;
+    align-items: center; gap: 16px;
+    background: #fff; border-radius: 10px; padding: 18px 20px;
+    border: 1px solid var(--light-gray);
+    box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    transition: box-shadow .2s, transform .2s;
+  }
+  .billing-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); transform: translateX(3px); }
+  .bc-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .bc-icon.gold { background: var(--gold-light); }
+  .bc-icon.rose { background: rgba(232,71,95,.12); }
+  .bc-icon.green { background: rgba(34,197,94,.12); }
+  .bc-icon.blue { background: rgba(59,130,246,.1); }
+  .bc-text strong { display: block; font-size: .9rem; color: var(--ink); margin-bottom: 2px; }
+  .bc-text span { font-size: .8rem; color: var(--gray); }
+  .bc-badge { font-size: .7rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+  .bc-badge.new { background: rgba(34,197,94,.1); color: #15803d; }
+  .bc-badge.pro { background: var(--gold-light); color: var(--gold-dark); }
+  /* Dashboard preview */
+  .dashboard-preview {
+    background: var(--ink);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,.2);
+  }
+  .dp-topbar {
+    background: rgba(255,255,255,.05);
+    padding: 12px 20px; display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .dp-topbar span { font-family: 'Playfair Display', serif; font-size: .9rem; color: var(--white); font-weight: 700; }
+  .dp-dots { display: flex; gap: 6px; }
+  .dp-dots span { width: 10px; height: 10px; border-radius: 50%; }
+  .dp-dots span:nth-child(1) { background: #FF605C; }
+  .dp-dots span:nth-child(2) { background: #FFBD44; }
+  .dp-dots span:nth-child(3) { background: #00CA4E; }
+  .dp-body { padding: 20px; }
+  .dp-kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+  .dp-kpi { background: rgba(255,255,255,.05); border-radius: 8px; padding: 14px; text-align: center; }
+  .dp-kpi .kpi-val { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: var(--gold); }
+  .dp-kpi .kpi-lbl { font-size: .65rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+  .dp-table { width: 100%; border-collapse: collapse; }
+  .dp-table th { font-size: .65rem; color: rgba(255,255,255,.3); text-transform: uppercase; letter-spacing: .06em; padding: 6px 8px; text-align: left; }
+  .dp-table td { font-size: .75rem; color: rgba(255,255,255,.7); padding: 8px; border-top: 1px solid rgba(255,255,255,.05); }
+  .td-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: .65rem; font-weight: 600; }
+  .td-badge.paid { background: rgba(34,197,94,.15); color: #22c55e; }
+  .td-badge.pending { background: rgba(201,168,76,.15); color: var(--gold); }
+
+  /* ──────────────────────────────────────── */
+  /* PAGE 6 — PRICING & CTA */
+  /* ──────────────────────────────────────── */
+  #pricing {
+    background: var(--cream);
+    padding: 100px 6%;
+    justify-content: center;
+  }
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; max-width: 1000px; margin: 0 auto;
+  }
+  .pricing-card {
+    background: #fff; border-radius: 16px; padding: 36px 28px;
+    border: 1.5px solid var(--light-gray);
+    position: relative; overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .pricing-card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,.1); }
+  .pricing-card.featured {
+    background: var(--ink); border-color: var(--gold);
+    transform: scale(1.04);
+  }
+  .pricing-card.featured:hover { transform: scale(1.04) translateY(-6px); }
+  .pc-ribbon {
+    position: absolute; top: 16px; right: -24px;
+    background: var(--rose); color: #fff;
+    font-size: .65rem; font-weight: 700; padding: 4px 32px;
+    transform: rotate(45deg); letter-spacing: .08em; text-transform: uppercase;
+  }
+  .pc-plan { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); margin-bottom: 12px; }
+  .pc-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem; font-weight: 900;
+    color: var(--ink); line-height: 1;
+    margin-bottom: 6px;
+  }
+  .pricing-card.featured .pc-price { color: var(--white); }
+  .pc-price sup { font-size: 1.2rem; vertical-align: top; margin-top: 8px; }
+  .pc-period { font-size: .78rem; color: var(--gray); margin-bottom: 24px; }
+  .pricing-card.featured .pc-period { color: rgba(255,255,255,.5); }
+  .pc-divider { height: 1px; background: var(--light-gray); margin-bottom: 24px; }
+  .pricing-card.featured .pc-divider { background: rgba(255,255,255,.1); }
+  .pc-features { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 28px; }
+  .pc-features li { font-size: .85rem; color: var(--gray); display: flex; align-items: center; gap: 10px; }
+  .pricing-card.featured .pc-features li { color: rgba(255,255,255,.65); }
+  .pc-features li::before { content: '✓'; font-weight: 700; color: var(--gold); flex-shrink: 0; }
+  .pc-features li.disabled { opacity: .4; }
+  .pc-features li.disabled::before { content: '–'; }
+  .pc-btn {
+    display: block; text-align: center; padding: 13px;
+    border-radius: 8px; font-size: .88rem; font-weight: 700; text-decoration: none;
+    transition: transform .15s, box-shadow .2s;
+    border: 2px solid var(--gold); color: var(--gold-dark);
+    background: transparent;
+  }
+  .pc-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,168,76,.2); }
+  .pc-btn.featured-btn { background: var(--rose); border-color: var(--rose); color: #fff; }
+  .pc-btn.featured-btn:hover { background: var(--rose-dark); box-shadow: 0 6px 20px rgba(232,71,95,.35); }
+
+  /* CTA Banner */
+  .cta-banner {
+    max-width: 1000px; margin: 80px auto 0;
+    background: linear-gradient(135deg, var(--ink) 0%, var(--ink-mid) 100%);
+    border-radius: 20px; padding: 60px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 40px; border: 1px solid rgba(201,168,76,.2);
+    position: relative; overflow: hidden;
+  }
+  .cta-banner::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,.15) 0%, transparent 70%);
+  }
+  .cta-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 900; color: var(--white);
+    margin-bottom: 10px;
+  }
+  .cta-text h2 em { color: var(--gold); font-style: normal; }
+  .cta-text p { font-size: .9rem; color: rgba(255,255,255,.5); }
+  .cta-actions { display: flex; gap: 14px; flex-shrink: 0; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,.5);
+    padding: 40px 6%; text-align: center;
+    border-top: 1px solid rgba(255,255,255,.06);
+  }
+  footer .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 900; color: var(--white); margin-bottom: 8px;
+  }
+  footer .footer-logo span { color: var(--rose); }
+  footer p { font-size: .8rem; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width: 900px) {
+    .hero-inner, .calc-grid, .billing-grid { grid-template-columns: 1fr; }
+    .hero-visual { order: -1; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .hiw-grid { grid-template-columns: 1fr 1fr; }
+    .testimonial-strip { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .pricing-card.featured { transform: none; }
+    .cta-banner { flex-direction: column; text-align: center; padding: 40px 30px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+  @media(max-width: 600px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .hiw-grid { grid-template-columns: 1fr; }
+    .dp-kpi-row { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ── MOBILE NAV ── */
+  .mobile-nav {
+    display: none; position: fixed; top: 70px; left: 0; right: 0;
+    background: rgba(253,248,240,.98); backdrop-filter: blur(12px);
+    padding: 20px 6%; flex-direction: column; gap: 16px;
+    border-bottom: 1px solid var(--light-gray);
+    z-index: 999;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { font-size: .95rem; font-weight: 500; color: var(--ink); text-decoration: none; padding: 6px 0; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">Jewellery<span>Pro</span></div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#calculator">Calculator</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#billing">Billing</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <a href="#pricing" class="nav-cta">Get Started</a>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#hero">Home</a>
+  <a href="#features">Features</a>
+  <a href="#calculator">Calculator</a>
+  <a href="#how-it-works">How It Works</a>
+  <a href="#billing">Billing</a>
+  <a href="#pricing">Pricing</a>
+</div>
+
+<!-- PAGE 1: HERO -->
+<section id="hero">
+  <div class="hero-bg-ornament"></div>
+  <div class="hero-bg-lines"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">✦ Now Available for All Jewellery</div>
+      <h1 class="hero-title">The Digital<br>Heart of Your<br><em>Jewellery Business</em></h1>
+      <p class="hero-desc">A complete solution for managing billing, live inventory, customer tracking, and business reports — crafted exclusively for jewellers.</p>
+      <div class="hero-btns">
+        <a href="#pricing" class="btn-primary">Start Free Trial</a>
+        <a href="#features" class="btn-outline">Explore Features</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><h3>2500+</h3><p>Jewellery Trust Us</p></div>
+        <div class="stat-item"><h3>₹10Cr+</h3><p>Invoices Generated</p></div>
+        <div class="stat-item"><h3>99.9%</h3><p>Uptime Guaranteed</p></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="phone-wrap">
+        <div class="phone-shell">
+          <div class="phone-screen">
+            <div class="phone-screen-inner">
+              <div class="ps-header">
+                <span class="dot"></span> Interest Calculator
+              </div>
+              <div class="ps-toggle">
+                <button class="inactive">Simple</button>
+                <button class="active">Compound</button>
+              </div>
+              <div class="ps-label">Principal Amount</div>
+              <input class="ps-input" placeholder="e.g 10000" readonly>
+              <div class="ps-label">Interest Per Month in %</div>
+              <input class="ps-input" placeholder="e.g 2 %" readonly>
+              <div class="ps-label">Dates</div>
+              <div class="ps-row">
+                <input class="ps-input" placeholder="Given Date" readonly>
+                <input class="ps-input" value="23/02/2026" readonly>
+              </div>
+              <button class="ps-btn-calc">Calculate</button>
+              <button class="ps-btn-reset">Reset</button>
+            </div>
+          </div>
+        </div>
+        <div class="phone-glow"></div>
+        <div class="hero-floating-card">
+          <div class="hfc-icon">💎</div>
+          <div class="hfc-text">
+            <strong>GST Invoice</strong>
+            <p>Generated instantly</p>
+          </div>
+        </div>
+        <div class="hero-floating-card2">
+          <strong>₹48,500</strong>
+          <span>Today's Sales</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2: FEATURES -->
+<section id="features">
+  <div class="features-bg"></div>
+  <div class="section-header">
+    <div class="section-tag">Everything You Need</div>
+    <h2 class="section-title">Powerful Features<br>Built for Jewellery</h2>
+    <p class="section-sub">Every tool you need to run your jewellery shop efficiently — in one elegant platform.</p>
+  </div>
+  <div class="features-grid reveal">
+    <div class="feature-card">
+      <div class="fc-icon">🧾</div>
+      <div class="fc-title">GST Billing</div>
+      <p class="fc-desc">Generate GST-compliant invoices in seconds. Customizable templates, auto tax calculation, and digital delivery to customers.</p>
+      <span class="fc-tag">→ Generate Now</span>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">📦</div>
+      <div class="fc-title">Live Stock Control</div>
+      <p class="fc-desc">Track your gold, silver, and gemstone inventory in real time. Set alerts for low stock and manage multiple categories effortlessly.</p>
+      <span class="fc-tag">→ View Inventory</span>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">📊</div>
+      <div class="fc-title">Business Reports</div>
+      <p class="fc-desc">Daily, weekly, and monthly reports for sales, profit, and inventory. Visualise your growth with beautiful charts.</p>
+      <span class="fc-tag">→ See Reports</span>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">👥</div>
+      <div class="fc-title">Customer Tracking</div>
+      <p class="fc-desc">Maintain complete customer profiles with purchase history, outstanding dues, and khata management built in.</p>
+      <span class="fc-tag">→ Manage Customers</span>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">🎨</div>
+      <div class="fc-title">Custom Invoice Design</div>
+      <p class="fc-desc">Design your invoice with your logo, shop name, and brand colours. Professional invoices that reflect your brand.</p>
+      <span class="fc-tag">→ Design Invoice</span>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">🧮</div>
+      <div class="fc-title">Interest Calculator</div>
+      <p class="fc-desc">Calculate simple and compound interest for gold loans and customer dues with date-based accuracy. Instantly shareable.</p>
+      <span class="fc-tag">→ Try Calculator</span>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3: CALCULATOR -->
+<section id="calculator">
+  <div class="calc-grid">
+    <div class="calc-info reveal">
+      <div class="section-tag">Smart Finance Tool</div>
+      <h2 class="section-title dark">Interest Calculator<br>for Gold Loans & Dues</h2>
+      <p style="font-size:.9rem;color:var(--gray);margin-top:14px;line-height:1.7">Calculate exact interest amounts for your customers in seconds — both simple and compound methods supported.</p>
+      <div class="calc-bullets">
+        <div class="calc-bullet">
+          <div class="cb-dot">📅</div>
+          <div class="cb-text">
+            <strong>Date-Based Calculation</strong>
+            <span>Enter given date and return date — the app calculates the exact number of days/months automatically.</span>
+          </div>
+        </div>
+        <div class="calc-bullet">
+          <div class="cb-dot">🔄</div>
+          <div class="cb-text">
+            <strong>Simple & Compound Modes</strong>
+            <span>Toggle between simple and compound interest modes for different loan types.</span>
+          </div>
+        </div>
+        <div class="calc-bullet">
+          <div class="cb-dot">📤</div>
+          <div class="cb-text">
+            <strong>Shareable Results</strong>
+            <span>Share calculation breakdowns directly with customers via WhatsApp or print.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="calc-widget reveal">
+      <div class="cw-title">Interest Calculator</div>
+      <div class="cw-sub">Calculate simple or compound interest instantly</div>
+      <div class="cw-toggle">
+        <button class="active-btn" id="simpleBtn" onclick="setMode('simple')">Simple Interest</button>
+        <button class="inactive-btn" id="compoundBtn" onclick="setMode('compound')">Compound Interest</button>
+      </div>
+      <div class="cw-field">
+        <label>Principal Amount (₹)</label>
+        <input type="number" id="principal" placeholder="e.g. 10000">
+      </div>
+      <div class="cw-field">
+        <label>Interest Rate (% per month)</label>
+        <input type="number" id="rate" placeholder="e.g. 2">
+      </div>
+      <div class="cw-row">
+        <div class="cw-field" style="margin-bottom:0">
+          <label>Given Date</label>
+          <input type="date" id="givenDate">
+        </div>
+        <div class="cw-field" style="margin-bottom:0">
+          <label>Return Date</label>
+          <input type="date" id="returnDate">
+        </div>
+      </div>
+      <button class="cw-calc-btn" onclick="calculateInterest()">Calculate Interest</button>
+      <button class="cw-reset-btn" onclick="resetCalc()">Reset</button>
+      <div class="cw-result" id="calcResult">
+        <div class="cwr-row">
+          <span>Principal Amount</span>
+          <strong id="rPrincipal">—</strong>
+        </div>
+        <div class="cwr-row">
+          <span>Duration</span>
+          <strong id="rDuration">—</strong>
+        </div>
+        <div class="cwr-row">
+          <span>Interest Amount</span>
+          <strong id="rInterest">—</strong>
+        </div>
+        <div class="cwr-row cwr-total">
+          <span>Total Amount</span>
+          <strong id="rTotal">—</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4: HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-header">
+    <div class="section-tag" style="color:var(--gold)">Simple Setup</div>
+    <h2 class="section-title">Up & Running<br>in 4 Simple Steps</h2>
+    <p class="section-sub">No technical skills needed. Start managing your jewellery business professionally in minutes.</p>
+  </div>
+  <div class="hiw-grid reveal">
+    <div class="hiw-step">
+      <span class="hiw-num">01</span>
+      <div class="hiw-icon">📲</div>
+      <div class="hiw-title">Download the App</div>
+      <p class="hiw-desc">Available on Android and iOS. Install in seconds — no complicated setup required.</p>
+      <div class="hiw-connector"></div>
+    </div>
+    <div class="hiw-step">
+      <span class="hiw-num">02</span>
+      <div class="hiw-icon">🏪</div>
+      <div class="hiw-title">Set Up Your Shop</div>
+      <p class="hiw-desc">Add your shop name, logo, GST number and product categories in the profile section.</p>
+      <div class="hiw-connector"></div>
+    </div>
+    <div class="hiw-step">
+      <span class="hiw-num">03</span>
+      <div class="hiw-icon">💍</div>
+      <div class="hiw-title">Add Inventory</div>
+      <p class="hiw-desc">Import or add your stock item by item. Categorise by gold, silver, gems, or custom.</p>
+      <div class="hiw-connector"></div>
+    </div>
+    <div class="hiw-step">
+      <span class="hiw-num">04</span>
+      <div class="hiw-icon">🚀</div>
+      <div class="hiw-title">Start Billing</div>
+      <p class="hiw-desc">Create your first GST invoice and share it with your customer. You're live!</p>
+    </div>
+  </div>
+  <div class="testimonial-strip reveal">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Jewelry 10X completely transformed how I manage my shop. Billing used to take 20 minutes — now it's 2."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RK</div>
+        <div class="testi-name">
+          <strong>Ramesh Kumar</strong>
+          <span>Srinagar Jewellery, Jaipur</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The interest calculator alone is worth it. My customers trust me more because I can show them the exact calculation."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">PS</div>
+        <div class="testi-name">
+          <strong>Priya Sharma</strong>
+          <span>Annapurna Gold House, Mumbai</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Stock control feature is excellent. I always know exactly what I have and what's running low. No more surprises."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AM</div>
+        <div class="testi-name">
+          <strong>Arjun Mehta</strong>
+          <span>Mehta Jewels, Surat</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 5: BILLING & INVENTORY -->
+<section id="billing">
+  <div class="billing-grid">
+    <div class="billing-left reveal">
+      <div class="section-tag">GST & Inventory</div>
+      <h2 class="section-title dark">Professional Billing<br>& Stock Management</h2>
+      <p style="font-size:.9rem;color:var(--gray);margin-top:14px;line-height:1.7;max-width:440px">Everything from generating GST invoices to tracking every item in your showcase — automated and accurate.</p>
+      <div class="billing-cards">
+        <div class="billing-card">
+          <div class="bc-icon gold">🧾</div>
+          <div class="bc-text">
+            <strong>Auto GST Invoice Generation</strong>
+            <span>CGST, SGST, IGST calculated automatically based on customer state</span>
+          </div>
+          <span class="bc-badge pro">PRO</span>
+        </div>
+        <div class="billing-card">
+          <div class="bc-icon rose">📦</div>
+          <div class="bc-text">
+            <strong>Live Stock Updates</strong>
+            <span>Stock reduces automatically every time a sale is recorded</span>
+          </div>
+          <span class="bc-badge new">LIVE</span>
+        </div>
+        <div class="billing-card">
+          <div class="bc-icon green">📱</div>
+          <div class="bc-text">
+            <strong>WhatsApp Invoice Sharing</strong>
+            <span>Send invoices directly to customer WhatsApp in one tap</span>
+          </div>
+          <span class="bc-badge pro">PRO</span>
+        </div>
+        <div class="billing-card">
+          <div class="bc-icon blue">📋</div>
+          <div class="bc-text">
+            <strong>Customer Khata (Ledger)</strong>
+            <span>Maintain credit and debit history per customer automatically</span>
+          </div>
+          <span class="bc-badge new">NEW</span>
+        </div>
+      </div>
+    </div>
+    <div class="dashboard-preview reveal">
+      <div class="dp-topbar">
+        <div class="dp-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <span>Jewelry10X Dashboard</span>
+        <span style="font-size:.7rem;color:rgba(255,255,255,.3)">Today</span>
+      </div>
+      <div class="dp-body">
+        <div class="dp-kpi-row">
+          <div class="dp-kpi">
+            <div class="kpi-val">₹1.2L</div>
+            <div class="kpi-lbl">Today Sales</div>
+          </div>
+          <div class="dp-kpi">
+            <div class="kpi-val">23</div>
+            <div class="kpi-lbl">Invoices</div>
+          </div>
+          <div class="dp-kpi">
+            <div class="kpi-val">142</div>
+            <div class="kpi-lbl">Stock Items</div>
+          </div>
+        </div>
+        <table class="dp-table">
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Item</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sunita Devi</td>
+              <td>Gold Necklace 22K</td>
+              <td>₹48,500</td>
+              <td><span class="td-badge paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td>Rajiv Sharma</td>
+              <td>Silver Anklet Set</td>
+              <td>₹3,200</td>
+              <td><span class="td-badge paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td>Meena Gupta</td>
+              <td>Diamond Ring</td>
+              <td>₹95,000</td>
+              <td><span class="td-badge pending">Pending</span></td>
+            </tr>
+            <tr>
+              <td>Ravi Patel</td>
+              <td>Gold Bangles 18K</td>
+              <td>₹32,800</td>
+              <td><span class="td-badge paid">Paid</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 6: PRICING & CTA -->
+<section id="pricing">
+  <div class="section-header">
+    <div class="section-tag" style="color:var(--gold-dark)">Simple Pricing</div>
+    <h2 class="section-title dark">Choose the Plan<br>That Fits Your Shop</h2>
+    <p style="font-size:.9rem;color:var(--gray);margin-top:14px">Start free, upgrade when you're ready. No hidden charges.</p>
+  </div>
+  <div class="pricing-grid reveal">
+    <div class="pricing-card">
+      <div class="pc-plan">Starter</div>
+      <div class="pc-price"><sup>₹</sup>0</div>
+      <div class="pc-period">Free forever</div>
+      <div class="pc-divider"></div>
+      <ul class="pc-features">
+        <li>Up to 50 invoices/month</li>
+        <li>Basic GST billing</li>
+        <li>Customer records (up to 100)</li>
+        <li>Interest Calculator</li>
+        <li class="disabled">Custom invoice design</li>
+        <li class="disabled">Business reports</li>
+        <li class="disabled">WhatsApp sharing</li>
+      </ul>
+      <a href="#" class="pc-btn">Get Started Free</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pc-ribbon">Popular</div>
+      <div class="pc-plan">Professional</div>
+      <div class="pc-price" style="color:var(--white)"><sup>₹</sup>499</div>
+      <div class="pc-period" style="color:rgba(255,255,255,.5)">per month</div>
+      <div class="pc-divider"></div>
+      <ul class="pc-features">
+        <li>Unlimited invoices</li>
+        <li>Full GST billing suite</li>
+        <li>Unlimited customers</li>
+        <li>Interest Calculator</li>
+        <li>Custom invoice design</li>
+        <li>Full business reports</li>
+        <li>WhatsApp sharing</li>
+      </ul>
+      <a href="#" class="pc-btn featured-btn">Start 14-Day Trial</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pc-plan">Enterprise</div>
+      <div class="pc-price"><sup>₹</sup>999</div>
+      <div class="pc-period">per month</div>
+      <div class="pc-divider"></div>
+      <ul class="pc-features">
+        <li>Everything in Professional</li>
+        <li>Multi-branch support</li>
+        <li>Staff management</li>
+        <li>Priority support</li>
+        <li>Data export & backup</li>
+        <li>Custom integrations</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <a href="#" class="pc-btn">Contact Sales</a>
+    </div>
+  </div>
+  <div class="cta-banner reveal">
+    <div class="cta-text">
+      <h2>Ready to Modernise Your<br><em>Jewellery Business?</em></h2>
+      <p>Join 2500+ jewellers across India who trust Jewelry 10X every day.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="#" class="btn-primary">Start Free Trial</a>
+      <a href="#" class="btn-outline" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.3)">Talk to Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================live stock control========================= -->
+<div class="dashboard-preview reveal">
+  <div class="dp-topbar">
+    <div class="dp-dots"><span></span><span></span><span></span></div>
+    <span>Live Inventory Management</span>
+    <button onclick="toggleStockForm()" style="background:var(--gold); border:none; border-radius:4px; font-size:0.6rem; padding:4px 8px; cursor:pointer; font-weight:bold;">+ Add Stock</button>
+  </div>
+  
+  <div class="dp-body">
+    <div id="stockForm" style="display:none; background:rgba(255,255,255,0.05); padding:15px; border-radius:8px; margin-bottom:15px; border:1px solid var(--gold);">
+        <div class="cw-row" style="margin-bottom:10px;">
+            <input type="text" id="newStockItem" placeholder="Item Name" class="ps-input" style="margin:0; background:white;">
+            <input type="number" id="newStockWeight" placeholder="Weight (g)" class="ps-input" style="margin:0; background:white;">
+        </div>
+        <button class="ps-btn-calc" onclick="addNewStock()" style="margin:0;">Confirm Addition</button>
+    </div>
+
+    <div class="dp-kpi-row">
+      <div class="dp-kpi">
+        <div class="kpi-val" id="totalStockCount">0</div>
+        <div class="kpi-lbl">Total Items</div>
+      </div>
+      <div class="dp-kpi">
+        <div class="kpi-val" id="totalStockWeight">0g</div>
+        <div class="kpi-lbl">Total Weight</div>
+      </div>
+    </div>
+
+    <table class="dp-table">
+      <thead>
+        <tr>
+          <th>Item Description</th>
+          <th>Weight</th>
+          <th style="text-align:right;">Status</th>
+        </tr>
+      </thead>
+      <tbody id="inventoryBody">
+        </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===================GST Billing & Invoice Generator========================= -->
+<section id="billing">
+  <div class="billing-grid">
+    <div class="billing-left reveal">
+      <div class="section-tag">GST & Inventory</div>
+      <h2 class="section-title dark">Professional GST Billing<br>& Live Calculations</h2>
+      <p style="font-size:.9rem;color:var(--gray);margin-top:14px;line-height:1.7;max-width:440px">
+        Generate GST-compliant invoices instantly. Our system automatically handles tax splits for local and interstate sales.
+      </p>
+      
+      <div class="cw-field" style="margin-top: 30px;">
+        <label>Customer Name</label>
+        <input type="text" id="custName" placeholder="e.g. Sunita Devi" oninput="updateLiveInvoice()">
+      </div>
+      <div class="cw-field">
+        <label>Item Description</label>
+        <input type="text" id="billItem" placeholder="e.g. Gold Necklace 22K" oninput="updateLiveInvoice()">
+      </div>
+      <div class="cw-row">
+        <div class="cw-field">
+          <label>Taxable Value (₹)</label>
+          <input type="number" id="billAmount" placeholder="Amount before tax" oninput="updateLiveInvoice()">
+        </div>
+        <div class="cw-field">
+          <label>GST Rate (%)</label>
+          <select id="billGstRate" onchange="updateLiveInvoice()" style="width:100%; padding:12px; background:var(--cream); border:1.5px solid var(--light-gray); border-radius:8px; font-family:'DM Sans';">
+            <option value="3" selected>3% (Jewellery)</option>
+            <option value="18">18% (Services/Gems)</option>
+            <option value="0.25">0.25% (Rough Stones)</option>
+          </select>
+        </div>
+      </div>
+      <button class="cw-calc-btn" onclick="printInvoice()" style="background:var(--rose); color:white;">Generate & Print Invoice</button>
+    </div>
+
+    <div class="dashboard-preview reveal">
+      <div class="dp-topbar">
+        <div class="dp-dots"><span></span><span></span><span></span></div>
+        <span>Live Invoice Preview</span>
+        <span id="invoiceDate" style="font-size:.7rem;color:rgba(255,255,255,.3)">22-04-2026</span>
+      </div>
+      <div class="dp-body" id="invoiceContent">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div style="font-family:'Playfair Display'; font-size:1.2rem; color:var(--gold); font-weight:900;">JEWELLERY PRO</div>
+          <div style="font-size:0.6rem; color:rgba(255,255,255,0.4); text-transform:uppercase;">Tax Invoice / Bill of Supply</div>
+        </div>
+        
+        <div style="display:flex; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">
+          <div>
+            <div style="font-size:0.6rem; color:rgba(255,255,255,0.3);">BILL TO:</div>
+            <strong id="pCustName" style="color:white; font-size:0.8rem;">Guest Customer</strong>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:0.6rem; color:rgba(255,255,255,0.3);">INVOICE NO:</div>
+            <strong style="color:white; font-size:0.8rem;">#JP-8821</strong>
+          </div>
+        </div>
+
+        <table class="dp-table">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th style="text-align:right;">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="pItemName">Gold Ornament</td>
+              <td style="text-align:right;" id="pTaxableValue">₹0.00</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top:20px; border-top:2px solid var(--gold); padding-top:10px;">
+          <div class="cwr-row"><span>CGST (1.5%)</span><strong id="pCgst">₹0.00</strong></div>
+          <div class="cwr-row"><span>SGST (1.5%)</span><strong id="pSgst">₹0.00</strong></div>
+          <div class="cwr-row cwr-total" style="margin-top:5px;"><span>Grand Total</span><strong id="pTotal" style="color:var(--gold);">₹0.00</strong></div>
+        </div>
+        
+        <div style="margin-top:15px; font-size:0.55rem; color:rgba(255,255,255,0.3); text-align:center;">
+          Thank you for your business! This is a computer-generated invoice.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Jewellery<span>Pro</span></div>
+  <p>© 2026 Jewelry 10X. A complete digital solution for jewellers. Made with ❤️ for Indian jewellers.</p>
+</footer>
+
+<script>
+// live stock control logic
+// Initial Inventory State
+let inventory = [
+  { id: 1, name: "Gold Necklace 22K", weight: 14.5, status: "Available" },
+  { id: 2, name: "Silver Anklet Set", weight: 45.0, status: "Available" },
+  { id: 3, name: "Diamond Ring 18K", weight: 4.2, status: "Available" }
+];
+
+// 1. Render the Inventory Table
+function renderInventory() {
+  const tbody = document.getElementById('inventoryBody');
+  const countEl = document.getElementById('totalStockCount');
+  const weightEl = document.getElementById('totalStockWeight');
+  
+  tbody.innerHTML = '';
+  let totalWeight = 0;
+  let activeCount = 0;
+
+  inventory.forEach(item => {
+    if(item.status === "Available") {
+        totalWeight += item.weight;
+        activeCount++;
+    }
+    
+    const row = `
+      <tr>
+        <td>${item.name}</td>
+        <td>${item.weight}g</td>
+        <td style="text-align:right;">
+            <span class="td-badge ${item.status === 'Available' ? 'paid' : 'pending'}">
+                ${item.status}
+            </span>
+        </td>
+      </tr>
+    `;
+    tbody.innerHTML += row;
+  });
+
+  countEl.textContent = activeCount;
+  weightEl.textContent = totalWeight.toFixed(2) + 'g';
+}
+
+// 2. Add New Stock
+function toggleStockForm() {
+    const form = document.getElementById('stockForm');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+function addNewStock() {
+    const name = document.getElementById('newStockItem').value;
+    const weight = parseFloat(document.getElementById('newStockWeight').value);
+
+    if(!name || !weight) return alert("Please fill all fields");
+
+    inventory.push({
+        id: Date.now(),
+        name: name,
+        weight: weight,
+        status: "Available"
+    });
+
+    renderInventory();
+    toggleStockForm();
+    document.getElementById('newStockItem').value = '';
+    document.getElementById('newStockWeight').value = '';
+}
+
+// 3. Link Sale to Stock (Update your existing printInvoice function)
+function printInvoice() {
+  const itemInput = document.getElementById('billItem').value;
+  const amount = parseFloat(document.getElementById('billAmount').value);
+  
+  if(!amount || !itemInput) {
+    alert("Please enter item and amount.");
+    return;
+  }
+
+  // Find item in inventory and mark as sold
+  const itemIndex = inventory.findIndex(i => i.name.toLowerCase().includes(itemInput.toLowerCase()) && i.status === "Available");
+  
+  if(itemIndex !== -1) {
+      inventory[itemIndex].status = "Sold";
+      renderInventory();
+      alert(`Invoice Generated! ${inventory[itemIndex].name} has been moved to Sold status.`);
+      window.print();
+  } else {
+      if(confirm("Item not found in Live Stock. Generate invoice anyway?")) {
+          window.print();
+      }
+  }
+}
+
+// Initialize on load
+renderInventory();
+
+// GST Billing Logic
+function updateLiveInvoice() {
+  const name = document.getElementById('custName').value || "Guest Customer";
+  const item = document.getElementById('billItem').value || "Gold Ornament";
+  const amount = parseFloat(document.getElementById('billAmount').value) || 0;
+  const gstRate = parseFloat(document.getElementById('billGstRate').value);
+  
+  const totalGst = (amount * gstRate) / 100;
+  const halfGst = totalGst / 2;
+  const grandTotal = amount + totalGst;
+
+  const fmt = v => '₹' + v.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+
+  // Update Preview
+  document.getElementById('pCustName').textContent = name;
+  document.getElementById('pItemName').textContent = item;
+  document.getElementById('pTaxableValue').textContent = fmt(amount);
+  document.getElementById('pCgst').textContent = fmt(halfGst);
+  document.getElementById('pSgst').textContent = fmt(halfGst);
+  document.getElementById('pTotal').textContent = fmt(grandTotal);
+}
+
+function printInvoice() {
+  const amount = parseFloat(document.getElementById('billAmount').value);
+  if(!amount) {
+    alert("Please enter a taxable amount first.");
+    return;
+  }
+  window.print();
+}
+
+// Set current date in invoice
+document.getElementById('invoiceDate').textContent = new Date().toLocaleDateString('en-GB');
+
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Hamburger menu
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileNav').classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-nav a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('mobileNav').classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Interest Calculator
+  let calcMode = 'simple';
+  function setMode(mode) {
+    calcMode = mode;
+    document.getElementById('simpleBtn').className = mode === 'simple' ? 'active-btn' : 'inactive-btn';
+    document.getElementById('compoundBtn').className = mode === 'compound' ? 'active-btn' : 'inactive-btn';
+    document.getElementById('calcResult').classList.remove('show');
+  }
+
+  function calculateInterest() {
+    const P = parseFloat(document.getElementById('principal').value);
+    const R = parseFloat(document.getElementById('rate').value);
+    const d1 = document.getElementById('givenDate').value;
+    const d2 = document.getElementById('returnDate').value;
+    if (!P || !R || !d1 || !d2) { alert('Please fill all fields.'); return; }
+    const start = new Date(d1), end = new Date(d2);
+    if (end <= start) { alert('Return date must be after given date.'); return; }
+    const diffMs = end - start;
+    const days = Math.round(diffMs / (1000 * 60 * 60 * 24));
+    const months = days / 30;
+    let interest, total;
+    if (calcMode === 'simple') {
+      interest = (P * R * months) / 100;
+      total = P + interest;
+    } else {
+      total = P * Math.pow(1 + R / 100, months);
+      interest = total - P;
+    }
+    const fmt = v => '₹' + v.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById('rPrincipal').textContent = fmt(P);
+    document.getElementById('rDuration').textContent = days + ' days (' + months.toFixed(1) + ' months)';
+    document.getElementById('rInterest').textContent = fmt(interest);
+    document.getElementById('rTotal').textContent = fmt(total);
+    document.getElementById('calcResult').classList.add('show');
+  }
+
+  function resetCalc() {
+    ['principal','rate','givenDate','returnDate'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('calcResult').classList.remove('show');
+  }
+
+  // Set default return date
+  document.getElementById('returnDate').value = '2026-02-23';
+</script>
+</body>
+</html>
